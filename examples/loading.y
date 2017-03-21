@@ -1,7 +1,10 @@
-microverse "./link_test/target/release/libfoo.dylib" :<
-	matrix()
+microverse "link_test/target/debug/libfoo.dylib" :<
+	print_matrix()
 >:
 
-x squanch matrix(1, 513)
+x on a cob
+y on a cob
+y assimilate 1
+x assimilate y
 
-show me what you got x
+print_matrix(x)

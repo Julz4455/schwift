@@ -30,6 +30,17 @@ pub enum Value {
     NativeFunction(Func),
 }
 
+impl Drop for Value {
+    fn drop(&mut self) {
+        println!("Dropping {:?}", self);
+        if let Value::NativeFunction(ref func) = *self {
+            let _func = &func.f;
+            std::mem::forget(_func);
+            println!("FORGETTING!");
+        }
+    }
+}
+
 impl fmt::Debug for Func {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "[Native function]")

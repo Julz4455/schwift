@@ -118,25 +118,14 @@ pub fn run_program(filename: &str, args: &[&str]) {
 
     s.parse_args(args);
 
-    let dylib = lib::Library::new("./link_test/target/debug/libfoo.dylib")
-        .expect("Failed to load library");
-    unsafe {
-        let wrapped_func: lib::Symbol<value::_Func> = dylib.get(b"matrix")
-            .expect("Failed to load function");
-
-        let func: value::_FuncSymbol = wrapped_func.into_raw();
-
-        s.insert("matrix", value::Func::new(func));
-    }
-
     {
         let _perf = perf("start_builtins");
-        let tokens = grammar::file(BUILTINS).unwrap();
+        // let tokens = grammar::file(BUILTINS).unwrap();
 
-        match s.run(&tokens) {
-            Ok(()) => {}
-            Err(e) => e.panic(BUILTINS_FILE),
-        }
+        // match s.run(&tokens) {
+        // Ok(()) => {}
+        // Err(e) => e.panic(BUILTINS_FILE),
+        // }
     }
 
     let tokens = compile(filename);
